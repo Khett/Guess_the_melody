@@ -10,11 +10,23 @@ using System.Windows.Forms;
 
 namespace Guess_the_melody
 {
-    public partial class Form1 : Form
+    public partial class fMain : Form
     {
-        public Form1()
+        fParam fp = new fParam();
+
+        public fMain()
         {
             InitializeComponent();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnSet_Click(object sender, EventArgs e)
+        {
+           fp.ShowDialog();
         }
     }
 }
