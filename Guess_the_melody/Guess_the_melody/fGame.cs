@@ -12,14 +12,35 @@ namespace Guess_the_melody
 {
     public partial class fGame : Form
     {
+        Random rnd = new Random();
+
         public fGame()
         {
             InitializeComponent();
         }
 
+        void MakeMusic()
+        {
+            int n = rnd.Next(0, Victorina.list.Count);
+            wmp.URL = Victorina.list[n];
+            //wmp.Ctlcontrols.play();
+            Victorina.list.RemoveAt(n);
+        }
+
+
         private void btnNext_Click(object sender, EventArgs e)
         {
-            wmp.URL = Victorina.list[1];
+            MakeMusic();
+        }
+
+        private void wmp_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void fGame_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            wmp.Ctlcontrols.stop();
         }
     }
 }
