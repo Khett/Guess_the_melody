@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fGame));
             this.wmp = new AxWMPLib.AxWindowsMediaPlayer();
             this.btnNext = new System.Windows.Forms.Button();
@@ -37,6 +38,9 @@
             this.lblCounter2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.lblMelodyCount = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.wmp)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,7 +60,7 @@
             this.btnNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnNext.Location = new System.Drawing.Point(264, 353);
             this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(126, 63);
+            this.btnNext.Size = new System.Drawing.Size(178, 63);
             this.btnNext.TabIndex = 1;
             this.btnNext.Text = ">>NEXT>>";
             this.btnNext.UseVisualStyleBackColor = true;
@@ -86,7 +90,7 @@
             // 
             this.lblCounter1.AutoSize = true;
             this.lblCounter1.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblCounter1.Location = new System.Drawing.Point(90, 105);
+            this.lblCounter1.Location = new System.Drawing.Point(94, 105);
             this.lblCounter1.Name = "lblCounter1";
             this.lblCounter1.Size = new System.Drawing.Size(68, 73);
             this.lblCounter1.TabIndex = 4;
@@ -96,7 +100,7 @@
             // 
             this.lblCounter2.AutoSize = true;
             this.lblCounter2.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblCounter2.Location = new System.Drawing.Point(521, 105);
+            this.lblCounter2.Location = new System.Drawing.Point(525, 105);
             this.lblCounter2.Name = "lblCounter2";
             this.lblCounter2.Size = new System.Drawing.Size(68, 73);
             this.lblCounter2.TabIndex = 5;
@@ -107,20 +111,46 @@
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button1.Location = new System.Drawing.Point(264, 205);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(134, 57);
+            this.button1.Size = new System.Drawing.Size(178, 57);
             this.button1.TabIndex = 6;
             this.button1.Text = "Paused";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button2.Location = new System.Drawing.Point(264, 280);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(134, 57);
+            this.button2.Size = new System.Drawing.Size(178, 57);
             this.button2.TabIndex = 7;
             this.button2.Text = "Play";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // lblMelodyCount
+            // 
+            this.lblMelodyCount.AutoSize = true;
+            this.lblMelodyCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblMelodyCount.Location = new System.Drawing.Point(319, 105);
+            this.lblMelodyCount.Name = "lblMelodyCount";
+            this.lblMelodyCount.Size = new System.Drawing.Size(31, 33);
+            this.lblMelodyCount.TabIndex = 8;
+            this.lblMelodyCount.Text = "0";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.progressBar1.Location = new System.Drawing.Point(168, 158);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(351, 41);
+            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBar1.TabIndex = 9;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // fGame
             // 
@@ -128,6 +158,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Guess_the_melody.Properties.Resources.IMG_2016_02_02_105955_HDR__2_;
             this.ClientSize = new System.Drawing.Size(662, 578);
+            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.lblMelodyCount);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lblCounter2);
@@ -140,6 +172,7 @@
             this.Name = "fGame";
             this.Text = "Guess the Melody";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.fGame_FormClosed);
+            this.Load += new System.EventHandler(this.fGame_Load);
             ((System.ComponentModel.ISupportInitialize)(this.wmp)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -156,5 +189,8 @@
         private System.Windows.Forms.Label lblCounter2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label lblMelodyCount;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Timer timer1;
     }
 }

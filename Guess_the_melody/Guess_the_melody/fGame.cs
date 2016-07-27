@@ -25,11 +25,13 @@ namespace Guess_the_melody
             wmp.URL = Victorina.list[n];
             //wmp.Ctlcontrols.play();
             Victorina.list.RemoveAt(n);
+            lblMelodyCount.Text = Victorina.list.Count.ToString();
         }
 
 
         private void btnNext_Click(object sender, EventArgs e)
         {
+            timer1.Start();
             MakeMusic();
         }
 
@@ -40,7 +42,38 @@ namespace Guess_the_melody
 
         private void fGame_FormClosed(object sender, FormClosedEventArgs e)
         {
+            timer1.Stop();
             wmp.Ctlcontrols.stop();
+        }
+
+        private void fGame_Load(object sender, EventArgs e)
+        {
+            lblMelodyCount.Text = Victorina.list.Count.ToString();
+            progressBar1.Value = 0;
+            progressBar1.Minimum = 0;
+            progressBar1.Maximum = Victorina.gameDuration;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            progressBar1.Value++;
+            if (progressBar1.Value == progressBar1.Maximum)
+            {
+                timer1.Stop();
+                wmp.Ctlcontrols.stop();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            wmp.Ctlcontrols.pause();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            timer1.Start();
+            wmp.Ctlcontrols.play();
         }
     }
 }
